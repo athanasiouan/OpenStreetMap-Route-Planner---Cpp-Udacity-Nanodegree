@@ -1,19 +1,10 @@
 # Route Planning Project
 
-This repo contains the starter code for the Route Planning project.
+This project implements a A* route planner running on OpenStreetMap in C++, similar to what is used on professional router planners like Google Maps.
+
+It can calculate and draw the shortest path from point a to point b. The user enters two coordinates with x and y between 0 and 100, then the map is drawn using the io2d library and the shortest path is rendered in orange:
 
 <img src="map.png" width="600" height="450" />
-
-## Cloning
-
-When cloning this project, be sure to use the `--recurse-submodules` flag. Using HTTPS:
-```
-git clone https://github.com/udacity/CppND-Route-Planning-Project.git --recurse-submodules
-```
-or with SSH:
-```
-git clone git@github.com:udacity/CppND-Route-Planning-Project.git --recurse-submodules
-```
 
 ## Dependencies for Running Locally
 * cmake >= 3.11.3
@@ -33,23 +24,30 @@ git clone git@github.com:udacity/CppND-Route-Planning-Project.git --recurse-subm
 ## Compiling and Running
 
 ### Compiling
+You need to install io2d and its dependencies first. Under Windows, you can use [vcpkg](https://github.com/microsoft/vcpkg) to do that easily:
+
+```
+vcpkg install io2d:x64-windows
+```
+
 To compile the project, first, create a `build` directory and change to that directory:
+
 ```
 mkdir build && cd build
 ```
-From within the `build` directory, then run `cmake` and `make` as follows:
+From within the `build` directory, then run `cmake` and `make` as follows and change the path to your vcpkg directory:
 ```
-cmake ..
+cmake -DCMAKE_TOOLCHAIN_FILE=vcpkg_root/scripts/buildsystems/vcpkg.cmake -DCMAKE_GENERATOR_PLATFORM=x64 ..
 make
 ```
+Now the CppND-Route-Planning-Project executable should have been created in the /bin folder.
+
+
 ### Running
-The executable will be placed in the `build` directory. From within `build`, you can run the project as follows:
+
+The executables will be placed in the `bin` directory. From within `build`, you can run the project as follows:
 ```
-./OSM_A_star_search
-```
-Or to specify a map file:
-```
-./OSM_A_star_search -f ../<your_osm_file.osm>
+../bin/CppND-Route-Planning-Project -f ../map.osm
 ```
 
 ## Testing
